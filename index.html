@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudySync AI — Smart Academic Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-6 font-sans">
+  <div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <header class="text-center my-8">
+      <h1 class="text-4xl font-extrabold text-blue-400 mb-2">📚 StudySync AI</h1>
+      <p class="text-slate-400">Turn chaotic deadlines into clear, actionable study plans.</p>
+    </header>
+
+    <!-- App Main Input Form -->
+    <main class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Subject / Course Name</label>
+          <input type="text" id="subject" placeholder="e.g., Clinical Biochemistry / Computer Science" class="w-full p-3 rounded bg-slate-900 border border-slate-700 focus:outline-none focus:border-blue-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Assignment / Task Description</label>
+          <textarea id="task" rows="3" placeholder="e.g., Final project submission with README, live deployment, and AI integration" class="w-full p-3 rounded bg-slate-900 border border-slate-700 focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Time Remaining (Hours)</label>
+          <input type="number" id="time" placeholder="11" class="w-full p-3 rounded bg-slate-900 border border-slate-700 focus:outline-none focus:border-blue-500">
+        </div>
+        <button onclick="generatePlan()" class="w-full bg-blue-600 hover:bg-blue-500 font-bold py-3 rounded transition duration-200">
+          🚀 Generate Action Plan
+        </button>
+      </div>
+
+      <!-- Output Section -->
+      <div id="outputContainer" class="mt-8 hidden">
+        <h2 class="text-xl font-bold text-blue-300 mb-2">Your AI Breakdown:</h2>
+        <div id="output" class="bg-slate-900 p-4 rounded border border-slate-700 whitespace-pre-wrap text-sm text-slate-200"></div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    async function generatePlan() {
+      const subject = document.getElementById('subject').value;
+      const task = document.getElementById('task').value;
+      const time = document.getElementById('time').value;
+      const outputDiv = document.getElementById('output');
+      const container = document.getElementById('outputContainer');
+
+      if (!subject || !task) {
+        alert("Please fill in both the subject and task description!");
+        return;
+      }
+
+      container.classList.remove('hidden');
+      outputDiv.innerText = "⏳ StudySync AI is generating your customized plan...";
+
+      setTimeout(() => {
+        outputDiv.innerText = `🎯 ACTION PLAN FOR: ${subject.toUpperCase()}\n\n1. Immediate Setup (1 Hour)\n   - Review requirements and isolate key components for "${task}".\n\n2. Core Execution (${Math.max(1, Math.floor(time * 0.6))} Hours)\n   - Focus on functional delivery first, ensuring core output logic is solid.\n\n3. Final Polish & Review (${Math.max(1, Math.floor(time * 0.2))} Hours)\n   - Verify all formatting and requirements before final submission.\n\n💡 PRO-TIP:\nBreak complex problems into smaller sub-tasks to maximize efficiency within your ${time || 12}-hour window!`;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
